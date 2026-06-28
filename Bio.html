@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr" data-accent="lumiere">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biographie — Harold B. · Ce qui nous lie !</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#0a0a0a;--bg-soft:#121212;
+    --line:rgba(255,255,255,.12);--line-soft:rgba(255,255,255,.07);
+    --white:#f4f1ec;--grey:#9a958d;--grey-dim:#6b675f;
+    --accent:#d8b15a;--accent-soft:rgba(216,177,90,.55);
+    --display:'Cormorant',serif;--ui:'Archivo',sans-serif;
+    --maxw:720px;
+  }
+  html,body{background:var(--bg);}
+  body{font-family:var(--ui);color:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  body::after{content:"";position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay;}
+  ::selection{background:var(--accent);color:#0a0a0a;}
+  a{color:inherit;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;background:rgba(10,10,10,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);}
+  nav .brand{font-family:var(--ui);font-weight:700;font-size:14px;letter-spacing:.28em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
+  nav .brand .dot{color:var(--accent);}
+  nav .back{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);
+    text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color .25s;}
+  nav .back:hover{color:var(--white);}
+  nav .back svg{width:15px;height:15px;}
+
+  /* HERO */
+  .hero{position:relative;min-height:78vh;display:flex;align-items:flex-end;overflow:hidden;
+    border-bottom:1px solid var(--line-soft);}
+  .hero-img{position:absolute;inset:0;z-index:0;}
+  .hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 14%;filter:grayscale(1) contrast(1.05);}
+  .hero-img::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(to bottom,rgba(10,10,10,.45) 0%,rgba(10,10,10,.1) 38%,rgba(10,10,10,.85) 88%,var(--bg) 100%);}
+  .hero-inner{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;width:100%;padding:0 32px 56px;}
+  .hero .eyebrow{font-size:11px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:18px;}
+  .hero h1{font-family:var(--display);font-weight:300;font-size:clamp(46px,9vw,92px);line-height:.95;letter-spacing:-.01em;}
+  .hero h1 em{font-style:italic;color:var(--accent);}
+  .hero .sub{font-family:var(--display);font-style:italic;font-weight:300;font-size:clamp(18px,2.4vw,24px);color:var(--grey);margin-top:16px;}
+
+  /* ARTICLE */
+  article{max-width:var(--maxw);margin:0 auto;padding:80px 32px 40px;}
+  article p{font-family:var(--display);font-weight:400;font-size:clamp(20px,2.6vw,24px);line-height:1.66;color:#e7e2d9;
+    letter-spacing:.004em;margin-bottom:30px;text-wrap:pretty;}
+  /* lettrine */
+  article p.first::first-letter{font-size:4.4em;line-height:.78;float:left;font-weight:500;color:var(--accent);
+    padding:6px 14px 0 0;}
+  /* phrases-pivots */
+  p.pivot{font-style:italic;font-size:clamp(26px,3.6vw,36px);line-height:1.32;color:var(--white);
+    text-align:center;margin:50px 0;padding:0 4%;letter-spacing:-.005em;}
+  p.pivot .gold{color:var(--accent);}
+  .rule{width:54px;height:1px;background:var(--accent-soft);margin:50px auto;}
+  .closing{text-align:center;font-style:italic;color:var(--accent);font-size:clamp(24px,3.4vw,32px);
+    line-height:1.4;margin:44px 0 10px;}
+  .sign{font-family:var(--display);font-style:italic;font-weight:500;font-size:40px;color:var(--white);
+    text-align:center;margin-top:30px;}
+  .sign small{display:block;font-family:var(--ui);font-style:normal;font-weight:600;font-size:10px;
+    letter-spacing:.3em;text-transform:uppercase;color:var(--grey-dim);margin-top:14px;}
+
+  /* figures */
+  figure{margin:46px 0;}
+  figure img{width:100%;display:block;border:1px solid var(--line);filter:grayscale(1) contrast(1.05);
+    box-shadow:0 30px 80px -40px rgba(0,0,0,.9);}
+  figure figcaption{font-family:var(--ui);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--grey-dim);margin-top:14px;text-align:center;}
+
+  /* CTA */
+  .cta{max-width:var(--maxw);margin:0 auto;padding:30px 32px 90px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--ui);font-size:12.5px;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;padding:14px 24px;border-radius:999px;border:1px solid var(--line);
+    background:none;color:var(--white);text-decoration:none;transition:all .25s;}
+  .btn-primary{background:var(--accent);color:#0a0a0a;border-color:var(--accent);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost:hover{background:rgba(255,255,255,.06);border-color:var(--white);}
+
+  footer{max-width:var(--maxw);margin:0 auto;padding:30px 32px 64px;text-align:center;border-top:1px solid var(--line-soft);}
+  footer .f-brand{font-family:var(--ui);font-weight:700;letter-spacing:.3em;text-transform:uppercase;font-size:13px;}
+  footer .f-brand .dot{color:var(--accent);}
+  footer .f-line{margin-top:12px;font-size:12px;color:var(--grey-dim);}
+
+  @media(max-width:520px){
+    nav,.hero-inner,article,.cta,footer{padding-left:20px;padding-right:20px;}
+    article p.first::first-letter{font-size:3.6em;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">HAROLD B<span class="dot">.</span></div>
+  <a class="back" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 18l-6-6 6-6"/></svg>
+    Retour à l'album
+  </a>
+</nav>
+
+<header class="hero">
+  <div class="hero-img"><img src="assets/portrait.png" alt="Harold"></div>
+  <div class="hero-inner">
+    <span class="eyebrow">Biographie</span>
+    <h1>Ce qui nous <em>lie</em></h1>
+    <p class="sub">Harold B. — le récit d'un premier album.</p>
+  </div>
+</header>
+
+<article>
+  <p class="pivot" style="margin-top:0;">La musique est entrée très tôt dans ma vie.</p>
+
+  <p class="first">Elle est arrivée par ma mère, par ses mains posées sur mon enfance, par ce piano vers lequel elle m'a conduit lorsque j'avais six ans. De ces premières années, il me reste surtout une image : un petit garçon en costume gris, un grand piano à queue, une scène de conservatoire, et mes parents dans la salle, venus l'applaudir. Peut-être que tout a commencé là, dans ce mélange de trac, de lumière et d'amour.</p>
+
+  <p class="pivot">Depuis, la musique ne m'a <span class="gold">jamais quitté</span>.</p>
+
+  <figure>
+    <img src="assets/bio-keyboard-young.jpg" alt="Harold au clavier, jeune">
+    <figcaption>Au clavier, sur scène — fin des années 1970</figcaption>
+  </figure>
+
+  <p>Elle a traversé mon adolescence comme une force vive. Les années 70 et 80 furent pour moi un territoire d'exploration : le rock, le hard rock, le rock progressif, le disco, le funk, le jazz-rock. J'aimais cette époque où la musique osait les longues traversées, les ruptures, les envolées, les climats. Yes, Genesis, et tant d'autres, m'ont appris qu'une chanson pouvait devenir un voyage, qu'un thème pouvait ouvrir un paysage, qu'une mélodie pouvait contenir une part de destin.</p>
+
+  <p>J'ai joué dans des groupes, j'en ai fondé, j'ai cherché ma place dans ce grand courant sonore qui m'emportait. À dix-sept ans, j'ai rejoint Skryvania, l'un des groupes français de rock progressif alors remarqués. Nous avons enregistré un album qui a trouvé des auditeurs bien au-delà de nos frontières, jusqu'en Asie, en Russie, et auprès de passionnés dispersés dans le monde.</p>
+
+  <figure>
+    <img src="assets/bio-skryvania-live.jpg" alt="Skryvania sur scène">
+    <figcaption>Avec Skryvania, sur scène</figcaption>
+  </figure>
+
+  <p class="pivot">Puis la vie a suivi son cours, mais la musique est restée.</p>
+
+  <p>Elle a accompagné mon parcours professionnel, mes images, mes films, mes publicités, mes intuitions. J'ai composé pour des spots, pour des projets, pour des instants qui réclamaient une couleur, un souffle, une émotion. Toujours, la mélodie m'a guidé. Pianiste de formation, je crois avoir gardé en moi cette conviction simple : une mélodie juste peut dire ce que les mots approchent seulement.</p>
+
+  <figure>
+    <img src="assets/bio-piano.jpg" alt="Le piano">
+    <figcaption>Le piano, fil rouge d'une vie</figcaption>
+  </figure>
+
+  <div class="rule"></div>
+
+  <p class="pivot"><span class="gold">Ce qui nous lie</span> est mon premier album personnel.</p>
+
+  <p>Il arrive tard, peut-être. Mais il y a des choses qui mûrissent longtemps avant d'oser se donner. Il n'y a pas d'âge pour ouvrir une porte que l'on portait en soi depuis toujours. Cet album est né de ce besoin : rassembler des traces, des élans, des souvenirs, des questions, des fidélités. Dire quelque chose de la vie, de l'amour, de la paix, de la lumière, de ce qui se perd parfois, et de ce qui demeure.</p>
+
+  <p>J'ai voulu un album à la fois joyeux et profond. Un album qui chante, mais qui pense aussi. Un album qui ne cherche pas à expliquer, mais à transmettre. Les paroles diront mieux que moi ce qui m'a traversé. Elles parlent de liens, d'espérance, de fragilité, de volonté d'aimer, de liberté intérieure. Elles parlent de ce fil invisible qui nous relie aux autres, à notre histoire, à nos absents, à nos rêves, à ce que nous tentons encore de construire.</p>
+
+  <p>Les chansons ont d'abord été enregistrées en studio, dans le geste vivant de la musique. Elles ont ensuite été retravaillées avec l'intelligence artificielle, non pour remplacer l'intention, mais pour l'élargir. Cet outil m'a permis d'ouvrir davantage les orchestrations, d'explorer des styles, d'affiner des climats, de donner à chaque morceau l'espace sonore qu'il appelait. L'IA, ici, n'est pas l'origine : elle est un atelier nouveau, une chambre d'échos, un prolongement offert à l'imaginaire.</p>
+
+  <p class="pivot">Avec Ce qui nous lie, j'ai le sentiment de <span class="gold">commencer</span>.</p>
+
+  <p>Commencer à mettre en musique tout ce qui, depuis longtemps, cherchait sa forme : des idées, des désirs, des souvenirs, des convictions, des questions. Commencer à faire entendre une voix qui a beaucoup composé pour les autres, et qui aujourd'hui accepte de parler en son nom.</p>
+
+  <figure>
+    <img src="assets/bio-stage-today.jpg" alt="Harold sur scène aujourd'hui">
+    <figcaption>Aujourd'hui, reprendre le micro</figcaption>
+  </figure>
+
+  <p class="closing">Cet album est un premier pas. Un premier signe. Peut-être le début d'une longue aventure.</p>
+
+  <p class="pivot" style="margin-bottom:0;">Il appartient désormais à ceux qui l'écouteront.</p>
+
+  <div class="sign">Harold B.<small>Ce qui nous lie · 2026</small></div>
+</article>
+
+<div class="cta">
+  <a href="index.html#titres" class="btn btn-primary">Écouter l'album</a>
+  <a href="Paroles.html" class="btn btn-ghost">Lire les paroles</a>
+</div>
+
+<footer>
+  <div class="f-brand">HAROLD B<span class="dot">.</span></div>
+  <div class="f-line">« Ce qui nous lie ! » — premier album · © 2026 Harold B.</div>
+</footer>
+
+</body>
+</html>

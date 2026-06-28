@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="fr" data-accent="lumiere">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paroles — Ce qui nous lie !</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Archivo:wght@400;500;600;700&display=swap">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#0a0a0a;--bg-soft:#121212;
+    --line:rgba(255,255,255,.12);--line-soft:rgba(255,255,255,.07);
+    --white:#f4f1ec;--grey:#9a958d;--grey-dim:#6b675f;
+    --accent:#d8b15a;--accent-soft:rgba(216,177,90,.55);
+    --display:'Cormorant',serif;--ui:'Archivo',sans-serif;
+    --maxw:880px;
+  }
+  html,body{background:var(--bg);}
+  body{font-family:var(--ui);color:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  body::after{content:"";position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay;}
+  ::selection{background:var(--accent);color:#0a0a0a;}
+  a{color:inherit;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;background:rgba(10,10,10,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);}
+  nav .brand{font-family:var(--ui);font-weight:700;font-size:14px;letter-spacing:.28em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
+  nav .brand .dot{color:var(--accent);}
+  nav .back{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);
+    text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color .25s;}
+  nav .back:hover{color:var(--white);}
+  nav .back svg{width:15px;height:15px;}
+
+  /* HERO */
+  .head{max-width:var(--maxw);margin:0 auto;padding:150px 32px 30px;}
+  .head .eyebrow{font-size:11px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:18px;}
+  .head h1{font-family:var(--display);font-weight:300;font-size:clamp(48px,9vw,104px);line-height:.95;letter-spacing:-.01em;}
+  .head h1 em{font-style:italic;color:var(--accent);}
+  .head p{color:var(--grey);font-size:15px;margin-top:18px;max-width:46ch;}
+
+  /* INDEX */
+  .toc{max-width:var(--maxw);margin:0 auto;padding:24px 32px 10px;display:flex;flex-wrap:wrap;gap:10px;
+    border-bottom:1px solid var(--line-soft);}
+  .toc a{font-size:12px;color:var(--grey);text-decoration:none;border:1px solid var(--line);border-radius:999px;
+    padding:7px 14px;transition:all .22s;letter-spacing:.02em;}
+  .toc a:hover{color:#0a0a0a;background:var(--accent);border-color:var(--accent);}
+
+  /* SONG */
+  .song{max-width:var(--maxw);margin:0 auto;padding:74px 32px;border-bottom:1px solid var(--line-soft);scroll-margin-top:90px;}
+  .song-head{display:flex;align-items:baseline;gap:20px;margin-bottom:36px;}
+  .song-num{font-family:var(--display);font-size:30px;color:var(--grey-dim);font-variant-numeric:tabular-nums;}
+  .song-title{font-family:var(--display);font-weight:400;font-size:clamp(30px,5vw,48px);line-height:1;letter-spacing:.005em;}
+  .stanza{margin-bottom:26px;}
+  .stanza:last-child{margin-bottom:0;}
+  .label{font-family:var(--ui);font-size:10.5px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:10px;}
+  .note{font-family:var(--display);font-style:italic;font-size:15px;color:var(--grey-dim);margin-bottom:6px;}
+  .line{font-family:var(--display);font-weight:400;font-size:clamp(19px,2.4vw,23px);line-height:1.62;color:var(--white);letter-spacing:.004em;}
+  .stanza.refrain{padding-left:20px;border-left:2px solid var(--accent-soft);}
+  .stanza.refrain .line{font-style:italic;color:#efe9dd;}
+
+  .pending{color:var(--grey);font-family:var(--display);font-style:italic;font-size:20px;line-height:1.6;}
+
+  footer{max-width:var(--maxw);margin:0 auto;padding:46px 32px 64px;text-align:center;}
+  footer .f-brand{font-family:var(--ui);font-weight:700;letter-spacing:.3em;text-transform:uppercase;font-size:13px;}
+  footer .f-brand .dot{color:var(--accent);}
+  footer .f-line{margin-top:12px;font-size:12px;color:var(--grey-dim);}
+  .totop{display:inline-block;margin-top:22px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:9px 18px;transition:all .22s;}
+  .totop:hover{color:var(--white);border-color:var(--white);}
+
+  @media(max-width:520px){
+    nav,.head,.toc,.song,footer{padding-left:20px;padding-right:20px;}
+    .song-head{gap:14px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">HAROLD B<span class="dot">.</span></div>
+  <a class="back" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 18l-6-6 6-6"/></svg>
+    Retour à l'album
+  </a>
+</nav>
+
+<header class="head">
+  <span class="eyebrow">Premier album · 2026</span>
+  <h1>Les <em>paroles</em></h1>
+  <p>Les onze textes de « Ce qui nous lie ! » — la vie, les désirs, l'amour, les épreuves et la lumière.</p>
+</header>
+
+<div class="toc" id="toc"></div>
+
+<main id="songs"></main>
+
+<footer>
+  <div class="f-brand">HAROLD B<span class="dot">.</span></div>
+  <div class="f-line">« Ce qui nous lie ! » — premier album · © 2026 Harold B.</div>
+  <a class="totop" href="#">Haut de page</a>
+</footer>
+
+<script>
+/* ===== PAROLES ===== */
+const SONGS = [
+  { n:1, t:"Toujours l'amour", lyrics:`C'est pas facile de parler vrai
+Quand tout le monde cherche à faire de l'effet
+Je dis ce que je ressens, pas ce qu'il faut dire
+Et je me débats pour pas mentir
+C'est pas facile d'être soi-même
+Quand tout le monde rêve d'être le même
+Avoir la foi c'est pas savoir
+C'est traverser tous les miroirs
+
+Refrain
+C'est le moment de réapprendre à aimer
+Encore l'amour même sans détour
+Toujours l'amour c'est chaque jour
+Encore plus fort
+Trouver l'accord
+Encore l'amour même sans détour
+Toujours l'amour c'est chaque jour
+Encore plus fort
+Y croire encore
+
+C'est pas facile de parler d'amour
+Quand il y a de la haine tous les jours
+On scrolle nos vies, on perd du temps
+À se convaincre qu'on vit vraiment
+C'est pas facile de garder le sourire
+Quand tout s'achète même le désir
+De s'élever au-dessus de tout ça
+De s'estimer qu'on vaut mieux que ça
+
+Refrain
+C'est le moment de réapprendre à aimer
+Encore l'amour même sans détour
+Toujours l'amour c'est chaque jour
+Encore plus fort
+Trouver l'accord
+Encore l'amour même sans détour
+Toujours l'amour c'est chaque jour
+Encore plus fort
+Y croire encore
+
+C'est pas facile de trouver sa place
+Quand tout va vite et nous dépasse
+Mais chaque jour je me dis pourtant
+Qu'on peut choisir de vivre autrement
+C'est pas facile de rester debout
+Parmi la foule, parmi les fous
+Mais tant que l'amour résiste en nous
+On saura bien aller au bout
+
+Refrain
+C'est le moment de réapprendre à aimer
+Encore l'amour même sans détour
+Toujours l'amour c'est chaque jour
+Encore plus fort
+Trouver l'accord
+Encore l'amour même sans détour
+Toujours l'amour c'est chaque jour
+Encore plus fort
+Y croire encore
+
+Outro
+Encore l'amour
+Même sans détour
+Toujours l'amour c'est chaque jour
+Encore plus fort
+Trouver l'accord` },
+
+  { n:2, t:"Repartons dans la danse", lyrics:`Couplet 1
+Y a pas de frein à notre amour
+Pas de passé, pas de retour
+Y a que des éclairs, des étincelles
+Qui nous secouent, nous ensorcellent
+
+Y a dans l'idée qu'on peut encore aimer
+Donner sa vie sans pourtant tout quitter
+Accueillir les moments fragiles
+Comme les cadeaux, de notre idylle
+
+Refrain
+Repartons dans la danse
+L'amour qui recommence
+C'est tellement mieux à deux
+Se promettre d'être heureux
+Repartons dans la vie
+Défier les interdits
+Écrire la suite ensemble
+Unir c' qui nous ressemble
+
+Couplet 2
+On a connu des silences lourds
+Des nuits trop longues, des jours trop courts
+On s'est trouvés au bon moment
+Pour se guérir tout doucement
+
+On a porté le monde d'avant
+On est en paix, on est vivants
+C'qu'on a appris, on l'a compris
+C'était hier, on a grandi
+
+Refrain
+Repartons dans la danse
+L'amour qui recommence
+C'est tellement mieux à deux
+Se promettre d'être heureux
+Repartons dans la vie
+Défier les interdits
+Écrire la suite ensemble
+Unir c' qui nous ressemble
+
+Refrain
+Repartons dans la danse
+L'amour qui recommence
+C'est tellement mieux à deux
+Se promettre d'être heureux
+Repartons dans la vie
+Défier les interdits
+Écrire la suite ensemble
+Unir c' qui nous ressemble` },
+
+  { n:3, t:"Chanter la paix", lyrics:`Couplet 1
+On sait tous que la colère
+Trouve en soi sa vraie raison
+Qu'elle déborde les frontières
+Pour ternir l'horizon
+On a tous perdu quelqu'un
+Dans le bruit ou les blessures
+Et l'absence parle à chacun
+Dans une longue déchirure
+
+Refrain
+Chanter la paix ensemble
+Chanter la vie, ça nous rassemble
+Main dans la main, cœur contre cœur
+Brisons les chaînes de la peur
+Chanter la paix ici
+Chanter l'amour, chanter la vie
+Ne plus attendre des jours meilleurs
+Ouvrons la porte de nos cœurs
+
+Couplet 2
+Dans un monde qui se noie
+Dans le mensonge et l'oubli
+Faisons vivre la joie
+Au-dessus de tout ce bruit
+Peu importe les drapeaux
+Car sous la pluie, le même ciel
+Sous les frontières qu'on porte haut
+On partage tous le même soleil
+
+Refrain
+Chanter la paix ensemble
+Chanter la vie, ça nous rassemble
+Main dans la main, cœur contre cœur
+Brisons les chaînes de la peur
+Chanter la paix ici
+Chanter l'amour, chanter la vie
+Ne plus attendre des jours meilleurs
+Ouvrons la porte de nos cœurs
+
+Pont
+Quand un mot juste peut relever
+Dans la nuit de la colère
+Un geste un peu désarmé
+Peut rallumer notre lumière
+Peu importe en qui l'on croit
+Ou même si l'on n'y croit pas
+Ce qui unit toi et moi
+C'est d'aimer l'autre ici-bas
+
+Refrain
+Chanter la paix ensemble
+Chanter la vie, ça nous rassemble
+Main dans la main, cœur contre cœur
+Brisons les chaînes de la peur
+Chanter la paix ici
+Chanter l'amour, chanter la vie
+Ne plus attendre des jours meilleurs
+Ouvrons la porte de nos cœurs
+
+Outro
+Chanter la paix
+Chanter la vie` },
+
+  { n:4, t:"Monde électrique", lyrics:`Je suis parti sur le chemin
+À la poursuite de ce destin
+Qui fait encore tourner le monde et rend les âmes vagabondes
+Dans leur jardin
+Je suis allé comme un enfant
+À la rencontre de mes penchants
+Affronter même l'impossible, jouer au feu à l'insensible
+Ouvert au châtiment
+
+Refrain
+Car on vit dans un monde électrique
+Où tout ce qui brille est magique
+Mais le plus important c'est d'aimer
+Et de recommencer
+
+J'ai voyagé de longues années
+Sur les divans, sur mes cahiers
+Afin d'écrire mon histoire sur des pianos ou des guitares
+Et pour réaliser que
+
+Refrain
+On vit dans un monde électrique
+Où tout ce qui brille est magique
+Mais le plus important c'est d'aimer
+Et de recommencer
+
+J'ai réussi à m'évader
+De mes prisons, de mes regrets
+Toutes ces idées qui m'hantaient, ces désirs qui me flattaient
+Choisir la liberté car
+
+Refrain
+On vit dans un monde électrique
+Où tout ce qui brille est magique
+Mais le plus important c'est d'aimer
+Et de recommencer
+
+Refrain
+On vit dans un monde fantastique
+Où tous nos rêves sont mirifiques
+Mais le plus important c'est d'aimer
+Et de recommencer
+
+On vit dans un monde électrique
+Où tout ce qui brille est magique
+Mais le plus important c'est d'aimer
+Et de recommencer` },
+
+  { n:5, t:"Lucy", lyrics:`La terre était sauvage, cruelle
+Le règne animal, mortel.
+Tu errais entre-deux, fragile,
+Pas tout à fait humaine, Lucy
+
+Tes yeux voyaient des choses si belles,
+Des couleurs et des formes, irréelles.
+Tes sens étaient à vif, sentir…
+Tu n'savais pas comment le dire.
+
+Refrain
+Il faut que tu te lèves,
+que ton âme se soulève.
+Debout, le monde s'éclaire, lumière.
+Il faut que tu le dises,
+que tu le traduises.
+Trouver la bonne parole…
+Ton envol.
+
+Tu vas devoir marcher devant,
+Affronter l'ombre et le tourment
+Relever tous les défis,
+Tracer ton avenir, Lucy
+
+Tu marches sous un ciel immense
+Toi par qui, l'histoire commence.
+Tu portes déjà, sans le savoir
+Le premier souffle de l'espoir
+
+Refrain
+Il faut que tu te lèves,
+que ton âme se soulève.
+Debout, le monde s'éclaire, lumière.
+Il faut que tu le dises,
+que tu le traduises.
+Trouver la bonne parole…
+Ton envol.` },
+
+  { n:6, t:"Cruelle désillusion", lyrics:`Tu viens quand je ne t'attends pas
+Pour te fondre dans mes bras
+Douce ivresse du désir
+Que l'on ne peut pas retenir
+Tu m'enveloppes de tes caresses
+tu t'égares sur mes fesses
+Je succombe à chaque fois
+Dans ce jeu trouble du toi et moi
+
+Refrain
+Mais où ça nous mène
+Nos corps s'appellent
+Drogue charnelle
+Divine sensation (oh oh oh)
+Nos cœurs s'appellent
+Amours rebelles
+Cruelle désillusion
+
+Tu prends ma fragilité
+Pour nourrir ta volupté
+Tu fais croire que tu résistes
+Tu fais l'amour comme une artiste
+
+Moi je t'aime, comme je te hais
+Prisonnier de ce qui me plaît
+À me livrer authentique
+À tes désirs impudiques
+
+Refrain
+Mais où ça nous mène
+Nos corps s'appellent
+Drogue charnelle
+Divine sensation (oh oh oh)
+Nos cœurs s'appellent
+Amours rebelles
+Cruelle désillusion
+
+Pont
+Instrumental
+
+Dans le vide de ta présence
+J'ai perdu mon innocence
+Succomber à tes désirs
+C'est abdiquer pour te servir
+
+Refrain
+Mais où ça nous mène
+Mon corps t'appelle
+Drogue charnelle
+Divine sensation (oh oh oh)
+Mon cœur t'appelle
+Amour rebelle
+Cruelle désillusion
+
+Refrain
+Mais où ça nous mène
+Mon corps t'appelle
+Drogue charnelle
+Divine sensation (oh oh oh)
+Mon cœur t'appelle
+Amour rebelle
+Cruelle désillusion` },
+
+  { n:7, t:"La liberté est au-delà", lyrics:`Couplet 1
+Alors que tout paraît normal
+Je ne tourne vraiment pas rond
+Je suis crispé et ça fait mal
+Alors qu'il n'y a pas de raison
+
+Je perds mon temps et ma patience
+Préoccupé par des idées
+Je blesse mon âme sans résistance
+Ça ne sert à rien de trop penser
+
+Refrain
+La liberté est au-delà !
+Ma vie est un combat
+Pour que je tienne debout
+Des chimères et des vagues
+Qui m'emportent partout
+Mais trouver la lumière
+C'est plus fort que tout
+Sentir tous ces éclairs
+Qui brûlent au fond de nous
+
+Couplet 2
+Certains moments, ça vous déchire
+Ça bouscule toutes les impressions
+Le monde apparaît tellement pire
+Et pourtant tout est illusion
+
+Alors je marche sur le sentier
+Pour retrouver ma liberté
+Ouvrir l'esprit et puis le cœur
+À la recherche du bonheur
+
+Refrain
+La liberté est au-delà !
+Ma vie est un combat
+Pour que je tienne debout
+Des chimères et des vagues
+Qui m'emportent partout
+Mais trouver la lumière
+C'est plus fort que tout
+Sentir tous ces éclairs
+Qui brûlent au fond de nous
+
+Pont
+Avec le temps, je vis avec
+C'est mon tribut, ma façon d'être
+Je laisse la vie faire son devoir
+Me tourmenter sans crier gare
+
+Quand je suis libre quelquefois
+Je me sens fort au fond de moi
+Même si ça ne dure jamais longtemps
+Se sentir bien rien qu'un instant
+
+Refrain final
+La vérité est au-delà !
+Ma vie est un combat
+Pour que je tienne debout
+Des chimères et des vagues
+Qui m'emportent partout
+Car trouver la lumière
+C'est plus fort que tout
+Sentir tous ces éclairs
+Qui brûlent au fond de nous
+Oui, trouver la lumière
+C'est plus fort que tout
+Sentir tous ces éclairs
+Qui brûlent au fond de nous` },
+
+  { n:8, t:"Soleil", lyrics:`Couplet 1
+Il a les yeux du même bleu que l'océan
+Il a le sourire de sa mère en dedans
+Il a la joie facile, l'envie de tout aimer
+C'est un guerrier du cœur, un chevalier
+
+Couplet 2
+Il a la volonté d'aller toujours plus loin
+Pour devenir celui qu'il est jusqu'à la fin
+Ne jamais ralentir, lutter contre les vents
+Donner à l'avenir tout son talent
+
+Refrain
+Soleil qui brille, réchauffe la vie
+Rien n'est plus ardent que ta lumière
+Soleil qui brûle et tout bascule
+Emporté par la force de ton mystère
+
+Couplet 3
+Il a affronté l'ennemi le plus puissant
+Et il en est sorti encore plus fort qu'avant
+C'était sa destinée, le match qu'il faut gagner
+Continuer à rêver
+
+Refrain
+Soleil qui brille, réchauffe la vie
+Rien n'est plus ardent que ta lumière
+Soleil qui brûle et tout bascule
+Emporté par la force de ton mystère
+
+Pont
+Soleil qui brille
+Soleil, tu brilles
+Rien n'est plus ardent que ta lumière
+Soleil qui brûle et tout bascule
+Emporté par la force de ton mystère
+
+Refrain final
+Soleil qui brille
+Soleil, tu brilles
+Rien n'est plus ardent que ta lumière
+Soleil qui brûle et tout bascule
+Emporté par la force de ton mystère` },
+
+  { n:9, t:"Où est passée la lumière", lyrics:`Couplet 1
+J'étais tombée si bas
+Là où on ne peut pas me voir
+Tous mes rires, toutes mes joies
+S'étaient perdus quelque part
+J'étais seule et j'avais froid
+Envahie de désirs noirs
+Moi qui vivais autrefois
+Je plongeais dans le brouillard
+
+Refrain
+Mais où est passée la lumière ?
+Les jours où il faisait beau
+Dites-moi ce que l'on peut faire
+Quand on ne peut pas aller plus haut
+Mais où est cachée la lumière ?
+Mon désir et mes passions
+Dites-moi ce que l'on doit faire
+Pour ne plus tout tourner en rond
+
+Couplet 2
+À cinquante ans, rien n'est joué
+Même si je me sens emportée
+Par les vagues de l'océan
+Je résiste au courant
+J'ai retrouvé l'appétit
+Je veux sortir de la nuit
+Je ressors pour voir du monde
+Et que la vie me réponde
+
+Refrain
+Où est passée la lumière ?
+Les jours où il faisait beau
+Dites-moi ce que l'on peut faire
+Quand on ne peut pas aller plus haut
+Mais où est cachée la lumière ?
+Mon désir et mes passions
+Dites-moi ce que l'on doit faire
+Pour ne plus tout tourner en rond
+
+Pont
+Mais un souffle s'est levé
+Dans un silence ébréché
+Quelque chose en moi s'est dit :
+« Tu recommences ici »
+J'ai vu briller une étoile
+Dans mes ruines, sous le voile
+Et ma peine, jour après jour
+A laissé entrer l'amour
+
+Final
+Voilà qu'elle revient, la lumière
+Même timide et même fragile
+Je sens battre dans la poussière
+Un cœur encore sur un fil
+Un cœur encore sur un fil` },
+
+  { n:10, t:"Nathane", lyrics:`Couplet 1
+Il était un temps où les jours étaient des rêves
+Où à chaque instant on tombe, on se relève
+Il n'y a pas de fin quand on est immortel
+On vit, on devient jusqu'au bout son modèle
+
+Pré-refrain
+Rien ne doit changer le fil de ton destin
+Écouter son cœur et suivre son instinct
+
+Couplet 2
+Pourtant maintenant, la vie des autres te guette
+Dix mille vérités qui viennent, qui s'enchevêtrent
+Mais c'est le chemin pour commencer à être
+Naître pour de bon et ne pas disparaître
+
+Pré-refrain
+Rien ne doit changer le fil de ton destin
+Écouter son cœur et suivre son instinct
+
+Refrain
+Nathane, lève-toi, c'est le moment de voir au-delà
+Nathane, emmène-moi au-delà des montagnes et des rois
+Nathane, lève-toi, va découvrir pourquoi tu es là
+Nathane, emmène-moi
+Nathane, emmène-moi
+
+Couplet 3
+Alors tous les jours seront une découverte
+Un voyage au-dedans pour que rien ne t'arrête
+Découvrir la vie sans préjugés de tout
+L'innocence de l'amour, ta force en garde-fou
+
+Pré-refrain
+Rien ne doit changer le fil de ton destin
+Écouter son cœur et suivre son instinct
+
+Refrain
+Nathane, lève-toi, c'est le moment de voir au-delà
+Nathane, emmène-moi au-delà des montagnes et des rois
+Nathane, lève-toi, va découvrir pourquoi tu es là
+Nathane, emmène-moi
+Nathane, emmène-moi
+
+Refrain final
+Nathane, lève-toi, c'est le moment de voir au-delà
+Nathane, emmène-moi au-delà des montagnes et des rois
+Nathane, lève-toi, va découvrir pourquoi tu es là
+Nathane, emmène-moi
+Nathane, emmène-moi
+
+Outro
+Et apparaîtra au détour d'un regard
+Celui qu'on n'attend pas, celui qu'on ne peut pas voir
+Le visage d'un ange qui change tous les repères
+Le sourire d'une étoile, explosion nucléaire` },
+
+  { n:11, t:"La volonté d'aimer", lyrics:`Couplet 1
+Te souviens-tu de ce moment
+De ces coups d'œil envoûtants
+Où tout est parti de cette soirée
+Au hasard d'une fête improvisée
+
+Refrain
+Quand je regarde notre histoire
+Je la ressens comme une victoire
+De cette volonté d'aimer
+Et de ne pas abandonner
+Au pouvoir du temps qui passe
+Du temps qui passe
+
+Couplet 2
+Tu étais belle comme dans un rêve
+Dans un rêve
+J'étais Adam, tu étais Ève
+Tout semblait libre comme le vent
+Farouche, indépendant, absolument
+
+Refrain
+Quand je regarde notre histoire
+Je la ressens comme une victoire
+De cette volonté d'aimer
+Et de ne pas abandonner
+Au pouvoir du temps qui passe
+Du temps qui passe
+
+Pont
+Quand tu as dit qui tu étais
+J'ai récité mon alphabet
+Mais je savais sur le chemin
+Que ce moment divin, c'était le mien
+C'était le mien
+
+Refrain
+Quand je regarde notre histoire
+Je la ressens comme une victoire
+De cette volonté d'aimer
+Et de ne pas abandonner
+Au pouvoir du temps qui passe
+Du temps qui passe
+
+Outro
+Oui, de ne pas abandonner
+La volonté d'aimer
+Oui, de ne pas abandonner
+La volonté d'aimer` }
+];
+
+const LABEL_RE = /^(Couplet|Refrain|Pré-?refrain|Pont|Outro|Final|Intro|Climax|Chorus|Pré-?chorus)\b/i;
+const slug = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+
+function renderStanza(block){
+  const lines = block.split('\n').filter(l=>l.trim()!=='');
+  if(!lines.length) return '';
+  let html='', isRefrain=false, body='';
+  lines.forEach((ln,idx)=>{
+    const t=ln.trim();
+    if(idx===0 && LABEL_RE.test(t)){
+      if(/^refrain/i.test(t)) isRefrain=true;
+      html+=`<div class="label">${t}</div>`;
+    } else if(/^\[.*\]$/.test(t)){
+      body+=`<div class="note">${t.replace(/^\[|\]$/g,'')}</div>`;
+    } else {
+      body+=`<div class="line">${t}</div>`;
+    }
+  });
+  return `<div class="stanza${isRefrain?' refrain':''}">${html}${body}</div>`;
+}
+
+const songsEl=document.getElementById('songs');
+const tocEl=document.getElementById('toc');
+SONGS.forEach(s=>{
+  const id=slug(s.t);
+  tocEl.insertAdjacentHTML('beforeend',`<a href="#${id}">${String(s.n).padStart(2,'0')} · ${s.t}</a>`);
+  let inner;
+  if(s.pending){
+    inner=`<p class="pending">Les paroles de ce titre seront ajoutées prochainement.</p>`;
+  } else {
+    inner=s.lyrics.split(/\n\s*\n/).map(renderStanza).join('');
+  }
+  songsEl.insertAdjacentHTML('beforeend',
+    `<section class="song" id="${id}">
+      <div class="song-head">
+        <span class="song-num">${String(s.n).padStart(2,'0')}</span>
+        <h2 class="song-title">${s.t}</h2>
+      </div>
+      ${inner}
+    </section>`);
+});
+</script>
+
+</body>
+</html>
