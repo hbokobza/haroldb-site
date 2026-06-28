@@ -540,11 +540,17 @@ function flashNote(msg){
 loadTrack(0);
 
 /* ============ NEWSLETTER ============ */
-document.querySelector('[data-news]').addEventListener('submit',e=>{
+document.querySelector('[data-news]').addEventListener('submit',async e=>{
   e.preventDefault();
   const note=document.querySelector('[data-news-note]');
-  note.textContent="Merci ! Vous serez prévenu·e en avant-première.";
-  note.style.color='var(--accent)';
+  const email=e.target.querySelector('input[type=email]').value;
+  try {
+    await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    note.textContent="Merci ! Vous serez prévenu·e en avant-première.";
+    note.style.color='var(--accent)';
+  } catch {
+    note.textContent="Une erreur est survenue, réessayez.";
+  }
   e.target.reset();
 });
 
