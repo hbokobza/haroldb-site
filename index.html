@@ -495,8 +495,19 @@ const iconPause = document.querySelector('[data-icon-pause]');
 let current = 0;
 
 // Pour activer le son : renseignez une URL par titre (même ordre que TRACKS).
-const SOURCES = ["audio/01-toujours-lamour-extrait.wav"]; // extrait 30s du titre 1
-
+const SOURCES = [
+  "audio/01-toujours-lamour-extrait.mp3",
+  "audio/02-repartons-dans-la-danse-extrait.mp3",
+  "audio/03-chanter-la-paix-extrait.mp3",
+  "audio/04-monde-electrique-extrait.mp3",
+  "audio/05-lucy-extrait.mp3",
+  "audio/06-cruelle-desillusion-extrait.mp3",
+  "audio/07-la-liberte-est-au-dela-extrait.mp3",
+  "audio/08-soleil-extrait.mp3",
+  "audio/09-ou-est-passee-la-lumiere-extrait.mp3",
+  "audio/10-nathane-extrait.mp3",
+  "audio/11-la-volonte-d-aimer-extrait.mp3"
+];
 function fmt(s){ if(!isFinite(s))return '—:—'; const m=Math.floor(s/60),x=Math.floor(s%60); return m+':'+String(x).padStart(2,'0'); }
 
 function loadTrack(i){
