@@ -131,6 +131,13 @@
     font-size:clamp(19px,2vw,25px);color:var(--grey);line-height:1.5;
     margin-top:22px;max-width:30ch;
   }
+  .hero-notice{
+    margin-top:24px;padding:15px 19px;
+    border:1px solid rgba(216,177,90,.4);border-radius:9px;
+    background:rgba(216,177,90,.07);
+    font-family:var(--ui,sans-serif);font-size:15px;line-height:1.6;
+    color:var(--accent);max-width:460px;
+  }
   .hero-actions{display:flex;gap:16px;align-items:center;margin-top:40px;flex-wrap:wrap;}
   .btn{
     display:inline-flex;align-items:center;gap:11px;cursor:pointer;
@@ -350,14 +357,15 @@
       <img src="assets/portrait.png" alt="Harold">
     </div>
     <div class="hero-copy reveal">
-      <span class="eyebrow">Premier album · 2026</span>
+      <span class="eyebrow">Premier album · à paraître 2026</span>
       <img class="hero-title-img" src="assets/title-gold.png" alt="Ce qui nous lie !">
       <div class="hero-name">Harold B.</div>
       <p class="hero-sub">Un disque sur la vie, les désirs, l'amour — les épreuves et la lumière.</p>
+      <p class="hero-notice">🎧 L'album arrive très bientôt sur toutes les plateformes.<br>En attendant, écoutez un extrait de chacun des 11 titres ci-dessous.</p>
       <div class="hero-actions">
-        <a href="#" class="btn btn-primary" data-listen>
+        <a href="#titres" class="btn btn-primary" data-listen>
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          Écouter l'album
+          Écouter les extraits
         </a>
         <a href="#titres" class="btn btn-ghost">Voir les 11 titres</a>
       </div>
